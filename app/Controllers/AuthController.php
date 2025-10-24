@@ -24,7 +24,14 @@ class AuthController
      */
     public function showRegister(): void
     {
-        include __DIR__ . '/../Views/auth/register.php';
+        $data = [
+            'title' => 'Sign Up',
+            'heading' => 'Sign up to your account',
+            'subheading' => 'Enter your credentials to access your dashboard',
+            'show_login_link' => true,
+            'show_forgot_link' => true
+        ];
+        renderAuth('auth/register', $data);
     }
 
     /**
@@ -78,7 +85,14 @@ class AuthController
      */
     public function showLogin(): void
     {
-        include __DIR__ . '/../Views/auth/login.php';
+        $data = [
+            'title' => 'Sign In',
+            'heading' => 'Sign in to your account',
+            'subheading' => 'Enter your credentials to access your dashboard',
+            'show_register_link' => true,
+            'show_forgot_link' => true
+        ];
+        renderAuth('auth/login', $data);
     }
 
     /**

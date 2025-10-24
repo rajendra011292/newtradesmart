@@ -3,8 +3,9 @@
   "description": "TradeSmart MVC web application using PHP, MySQL, TailwindCSS",
   "type": "project",
   "require": {
-    "vlucas/phpdotenv": "^5.6",
-    "bramus/router": "^1.6"
+    "bramus/router": "^1.6",
+    "phpmailer/phpmailer": "^7.0",
+    "vlucas/phpdotenv": "^5.6"
   },
   "autoload": {
     "psr-4": {

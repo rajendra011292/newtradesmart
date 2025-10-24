@@ -1,0 +1,29 @@
+{
+  "name": "tradesmart",
+  "version": "1.0.0",
+  "description": "",
+  "main": "postcss.config.js",
+  "scripts": {
+    "dev": "npx tailwindcss -i ./src/input.css -o ./public/assets/css/app.css --watch",
+    "build": "npx tailwindcss -i ./src/input.css -o ./public/assets/css/app.css --minify",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.10",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^3.4.18"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rajendra011292/newtradesmart.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rajendra011292/newtradesmart/issues"
+  },
+  "homepage": "https://github.com/rajendra011292/newtradesmart#readme"
+}

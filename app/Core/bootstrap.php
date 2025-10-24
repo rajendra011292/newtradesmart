@@ -35,11 +35,31 @@ $configArray = [
     'base_url'  => $_ENV['BASE_URL'] ?? '',
 ];
 
+if ( ($_ENV['APP_ENV'] ?? 'production') === 'development' ) {
+    $container->singleton(\App\Services\LogMailer::class, function($c) {
+        return new \App\Services\LogMailer();
+    });
+    // alias Mailer class name to LogMailer for consistent injection
+    $container->singleton(\App\Services\Mailer::class, function($c) {
+        return $c->get(\App\Services\LogMailer::class);
+    });
+} else {
+    // production: use actual SMTP Mailer (requires phpmailer and env settings)
+    $container->singleton(\App\Services\Mailer::class, function($c) {
+        return new \App\Services\Mailer();
+    });
+}
+
 $container->singleton('config', function ($c) use ($configArray) {
     // If you created App\Core\Config class, return new Config($configArray);
     // Otherwise simply return the array:
     return $configArray;
 });
+$container->singleton(\App\Controllers\MarketOverviewController::class, function ($c) {
+    $db = $c->get(\App\Core\Database::class);
+    return new \App\Controllers\MarketOverviewController($db);
+});
+
 
 // Example: bind a logger, mailer, or other services here if you add them later
 // $container->singleton(App\Services\Logger::class, function($c) { ... });

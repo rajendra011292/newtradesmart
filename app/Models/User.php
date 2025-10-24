@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use App\Core\Database;
@@ -88,5 +89,13 @@ class User
             // log if needed
             return false;
         }
+    }
+    public function updateProfile(int $id, string $name, ?string $bio, ?string $location, ?string $avatarPath = null): bool
+    {
+        $sql = "UPDATE users SET name = :name, bio = :bio, location = :location" . ($avatarPath ? ", avatar = :avatar" : "") . ", updated_at = NOW() WHERE id = :id";
+        $params = [':name' => $name, ':bio' => $bio, ':location' => $location, ':id' => $id];
+        if ($avatarPath) $params[':avatar'] = $avatarPath;
+        $stmt = $this->db->run($sql, $params);
+        return $stmt->rowCount() > 0;
     }
 }

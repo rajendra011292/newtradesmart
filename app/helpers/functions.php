@@ -56,3 +56,55 @@ function redirect(string $path): void {
     header('Location: ' . $path);
     exit;
 }
+
+// call this at top of routes or inside route closures/controllers
+function require_auth(): void {
+    if (empty($_SESSION['user_id'])) {
+        flash('error','You must log in.');
+        header('Location: /login'); exit;
+    }
+}
+
+function require_admin(): void {
+    require_auth();
+    // simple role check — adjust according to your user model
+    $db = $GLOBALS['container']->get(\App\Core\Database::class);
+    $user = (new \App\Models\User($db))->findById((int)$_SESSION['user_id']);
+    if (empty($user) || ($user['role'] ?? '') !== 'admin') {
+        http_response_code(403);
+        echo "Forbidden";
+        exit;
+    }
+}
+function render(string $viewPath, array $data = [], string $title = 'TradeSmart'): void {
+    extract($data); // make keys into variables
+    ob_start();
+    require __DIR__ . '/../Views/' . ltrim($viewPath, '/');
+    $content = ob_get_clean();
+    require __DIR__ . '/../Views/layout/main.php';
+}
+function renderAuth(string $viewPath, array $data = [], string $title = 'TradeSmart'): void {
+    extract($data); // make keys into variables
+    
+    // Ensure the view path has a .php extension
+    $viewFile = __DIR__ . '/../Views/' . ltrim($viewPath, '/');
+    if (!str_ends_with($viewFile, '.php')) {
+        $viewFile .= '.php';
+    }
+    
+    // Start output buffering
+    ob_start();
+    
+    // Include the view file
+    if (!file_exists($viewFile)) {
+        throw new Exception("View file not found: " . $viewFile);
+    }
+    
+    require $viewFile;
+    $content = ob_get_clean();
+    
+    // Include the layout
+    require __DIR__ . '/../Views/auth/_auth_layout.php';
+}
+
+
