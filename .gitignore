@@ -1,0 +1,93 @@
+# =====================================
+# 🧱 TRADEsmart .gitignore
+# =====================================
+
+# ----------------------------
+# 1. Environment & Secrets
+# ----------------------------
+.env
+.env.local
+.env.*.backup
+
+# ----------------------------
+# 2. Composer dependencies
+# ----------------------------
+/vendor/
+
+# ----------------------------
+# 3. Node / Tailwind (if used)
+/node_modules/
+/package-lock.json
+
+# ----------------------------
+# 4. Build outputs (CSS, JS, cache)
+/public/css/*
+!/public/css/.gitkeep
+/public/js/*
+!/public/js/.gitkeep
+/public/dist/
+/public/build/
+/storage/cache/
+/storage/logs/
+
+# ----------------------------
+# 5. OS / IDE files
+# ----------------------------
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# VS Code
+.vscode/
+.history/
+*.code-workspace
+
+# JetBrains / PHPStorm
+.idea/
+
+# ----------------------------
+# 6. Logs / Dumps
+# ----------------------------
+*.log
+*.sql
+*.sqlite
+*.bak
+*.tmp
+
+# ----------------------------
+# 7. PHP / XAMPP generated
+# ----------------------------
+/xampp/
+*.pid
+*.seed
+*.phar
+composer.lock
+
+# ----------------------------
+# 8. Deployment or local config
+# ----------------------------
+/config/*
+!/config/.gitkeep
+/.env.example
+
+# ----------------------------
+# 9. Cache directories
+# ----------------------------
+.cache/
+.tmp/
+.storage/
+.phpunit.result.cache
+
+# ----------------------------
+# 10. Misc (for safety)
+# ----------------------------
+/uploads/
+*.zip
+*.tar.gz
+*.7z
+*.bak
+*.old
