@@ -1,0 +1,13 @@
+-- 1. password_resets table
+CREATE TABLE password_resets (
+  id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(150) NOT NULL,
+  token VARCHAR(128) NOT NULL,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  INDEX (email),
+  INDEX (token)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- 2. add avatar to users (nullable)
+ALTER TABLE users
+  ADD COLUMN avatar VARCHAR(255) NULL AFTER email;
